@@ -304,29 +304,66 @@ function YouTubeSection() {
 // Twitch Embed Section
 function TwitchSection() {
   const channelName = 'mihlab';
+  const [embedLoaded, setEmbedLoaded] = useState(false);
+  const [embedError, setEmbedError] = useState(false);
+
+  // Get parent domains - Twitch requires exact domain match
+  const parentDomain = typeof window !== 'undefined' ? window.location.hostname : '';
+
+  // Show fallback card if embed fails or domain issues
+  if (embedError || !parentDomain) {
+    return (
+      <div data-ev-id="ev_19c97b7a2d" className="max-w-4xl mx-auto">
+        <div data-ev-id="ev_61b9f38bc3" className="bg-white/80 backdrop-blur-sm rounded-lg p-8 text-center">
+          <div data-ev-id="ev_9f008e2c5e" className="w-20 h-20 bg-[#9146FF]/10 rounded-full flex items-center justify-center mx-auto mb-6">
+            <Radio className="w-10 h-10 text-[#9146FF]" />
+          </div>
+          <h3 data-ev-id="ev_d17f194b4f" className="text-2xl font-semibold text-[#1A3A47] mb-3">Watch us Live on Twitch</h3>
+          <p data-ev-id="ev_9dcf456fad" className="text-[#4A6B78] mb-6 max-w-md mx-auto">Join our live workshops, philosophical discussions, and community events</p>
+          <a data-ev-id="ev_0f3d18d6e5"
+          href={`https://www.twitch.tv/${channelName}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 px-8 py-4 bg-[#9146FF] text-white rounded-lg hover:bg-[#7c3aed] transition-colors font-medium text-lg">
+
+            <Radio className="w-5 h-5" />
+            Open Twitch Channel
+            <ExternalLink className="w-5 h-5" />
+          </a>
+        </div>
+      </div>);
+
+  }
 
   return (
-    <div data-ev-id="ev_9a397bd95e" className="max-w-4xl mx-auto">
-      <div data-ev-id="ev_1b21e359c1" className="bg-white/80 backdrop-blur-sm rounded-lg overflow-hidden">
-        <div data-ev-id="ev_c2eff6a239" className="aspect-video">
-          <iframe data-ev-id="ev_fb7a0b3fa2"
-          src={`https://player.twitch.tv/?channel=${channelName}&parent=${window.location.hostname}&muted=true`}
+    <div data-ev-id="ev_824db0490c" className="max-w-4xl mx-auto">
+      <div data-ev-id="ev_28087dfe09" className="bg-white/80 backdrop-blur-sm rounded-lg overflow-hidden">
+        <div data-ev-id="ev_f34322b968" className="aspect-video relative">
+          {!embedLoaded &&
+          <div data-ev-id="ev_195a4d1b4d" className="absolute inset-0 flex items-center justify-center bg-[#1A3A47]/10">
+              <Loader2 className="w-8 h-8 text-[#9146FF] animate-spin" />
+            </div>
+          }
+          <iframe data-ev-id="ev_36625c61b2"
+          src={`https://player.twitch.tv/?channel=${channelName}&parent=${parentDomain}&muted=true`}
           className="w-full h-full"
           allowFullScreen
-          title="MIHLab Twitch Stream" />
+          title="MIHLab Twitch Stream"
+          onLoad={() => setEmbedLoaded(true)}
+          onError={() => setEmbedError(true)} />
 
         </div>
-        <div data-ev-id="ev_fa3e46c956" className="p-4 flex items-center justify-between">
-          <div data-ev-id="ev_04bfb96640" className="flex items-center gap-3">
-            <div data-ev-id="ev_a7bfe80683" className="w-10 h-10 bg-[#9146FF]/10 rounded-lg flex items-center justify-center">
+        <div data-ev-id="ev_dc4626389d" className="p-4 flex items-center justify-between">
+          <div data-ev-id="ev_95dc45aac8" className="flex items-center gap-3">
+            <div data-ev-id="ev_719faf01b6" className="w-10 h-10 bg-[#9146FF]/10 rounded-lg flex items-center justify-center">
               <Radio className="w-5 h-5 text-[#9146FF]" />
             </div>
-            <div data-ev-id="ev_81d39550ae">
-              <p data-ev-id="ev_7e438b9ecd" className="font-semibold text-[#1A3A47]">MIHLab on Twitch</p>
-              <p data-ev-id="ev_eedc90ff9a" className="text-sm text-[#4A6B78]">Live workshops & discussions</p>
+            <div data-ev-id="ev_d1c399bb2c">
+              <p data-ev-id="ev_eca75841ae" className="font-semibold text-[#1A3A47]">MIHLab on Twitch</p>
+              <p data-ev-id="ev_e0975b4e13" className="text-sm text-[#4A6B78]">Live workshops & discussions</p>
             </div>
           </div>
-          <a data-ev-id="ev_bed53e7a8e"
+          <a data-ev-id="ev_be7779fb8d"
           href={`https://www.twitch.tv/${channelName}`}
           target="_blank"
           rel="noopener noreferrer"
