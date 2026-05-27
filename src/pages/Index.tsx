@@ -39,7 +39,7 @@ export default function Index() {
 
         <div data-ev-id="ev_739f504cbd" className="relative z-10 max-w-4xl mx-auto px-6 text-center">
           <h1 data-ev-id="ev_e9dbea47ed" className="text-lg md:text-xl font-medium text-[#1A3A47]/80 mb-4">
-            The Experience Machines
+            The Moral Imagination and Hope Laboratory
           </h1>
           <p data-ev-id="ev_d042b59cbc" className="text-3xl md:text-4xl lg:text-5xl font-light text-[#1A3A47] leading-tight mb-8 text-balance">
             <span data-ev-id="ev_2100e1cd28" className="font-semibold">Most philosophy is done analytically,</span> we take seriously the idea that philosophy may also be typological. 
